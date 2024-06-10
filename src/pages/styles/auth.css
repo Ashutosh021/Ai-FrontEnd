@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+}
+.authBox{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#signup {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  #signup h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #signup form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #signup label {
+    margin-bottom: 10px;
+  }
+  
+  #signup input[type="text"],
+  #signup input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  #signup button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  #signup button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  #signup button:hover {
+    background-color: #0056b3;
+  }
+  
+  #signup a {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  #signup a button {
+    background-color: #28a745;
+  }
+  
+  #signup a button:hover {
+    background-color: #218838;
+  }
+  
