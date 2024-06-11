@@ -16,18 +16,19 @@ const History = () => {
             "Authorization": `Bearer ${authToken}`,
           },
         });
+
         const data = res.data;
         if (data?.status === "success") {
           const formattedData = data.history.reverse().map(item => ({
             ...item,
-            createdAt: new Date(item.createdAt).toLocaleString()
+            createdAt: new Date(item.createdAt).toLocaleString(),
           }));
           setHistoryData(formattedData);
         } else {
           setError(data.msg || 'Failed to fetch history');
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setError('An error occurred while fetching the history');
       }
     };
@@ -37,7 +38,7 @@ const History = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4">History</h1>
+      <h1 className="text-center mb-4 text-light">Search History</h1>
       {error && <p className="text-danger">{error}</p>}
       {historyData.length > 0 ? (
         <ul className="list-group">
@@ -50,7 +51,7 @@ const History = () => {
           ))}
         </ul>
       ) : (
-        <p className="text-muted text-center">{!error && "No history available"}</p>
+        <p className="text-muted text-center text-light">{!error && "No history available || Try Sign up / Log in"}</p>
       )}
     </div>
   );

@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import './styles/auth.css'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import './styles/auth.css';
 
 const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const addNewUser = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await axios.post(`https://aibackend-1d3h.onrender.com/api/v1/auth/signup`, {
         email,
@@ -22,13 +25,26 @@ const Signup = () => {
       });
       const data = res.data;
       if (data.status === "success") {
-        navigate("/login");
+        toast.success("Signup successful!", {
+          position: "top-right",
+          autoClose: 3000,
+          onClose: () => navigate("/login")
+        });
       } else {
-        alert(data.msg);
+        toast.error(data.msg, {
+          position: "top-right",
+          autoClose: 3000
+        });
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      alert("An error occurred while signing up");
+      toast.error("An error occurred while signing up", {
+        position: "top-right",
+        autoClose: 3000
+      });
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
@@ -57,11 +73,14 @@ const Signup = () => {
             required
           />
           <br />
-          <button type="submit">SignUp</button>
+          <button type="submit" disabled={isLoading}>
+          {isLoading?"Sign in...":"Sign in"}
+          </button>
           <Link to="/login">
-            <button>Login</button>
+            <button type="button">Already a User?</button>
           </Link>
         </form>
+        <ToastContainer />
       </div>
     </div>
   );
