@@ -1,0 +1,49 @@
+.main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+
+  }
+  
+  .left {
+    display: flex;
+    gap: 20px;
+    
+  }
+  
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 15%;
+  }
+  
+  .user-icon {
+    margin-left: auto; /* Push the user icon to the right */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .main {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      padding: 10px;
+    }
+  
+    .left {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .right {
+      margin-top: 10px; /* Add space between left and right sections */
+      width: 100%; /* Expand right section to full width */
+      justify-content: space-between; /* Distribute items evenly */
+    }
+  
+    .user-icon {
+      margin: 0; /* Reset margin for user icon */
+    }
+  }
+  

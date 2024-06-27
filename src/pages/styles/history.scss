@@ -1,0 +1,28 @@
+.list-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1200px; /* Adjust max-width as per your layout */
+  
+  .list-group-item {
+    flex: 0 1 calc(33.33% - 20px);
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Normal shadow effect */
+    border-radius: 8px;
+    background-color: #ffffff; /* White background */
+    
+    p {
+      margin-bottom: 5px;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 10px;
+    }
+  }
+}

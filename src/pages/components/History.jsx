@@ -10,26 +10,29 @@ const History = () => {
     const fetchHistory = async () => {
       try {
         const authToken = localStorage.getItem("authToken");
-        const res = await axios.get(`https://aibackend-1d3h.onrender.com/api/v1/history`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`,
-          },
-        });
+        const res = await axios.get(
+          `https://aibackend-1d3h.onrender.com/api/v1/history`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
 
         const data = res.data;
         if (data?.status === "success") {
-          const formattedData = data.history.reverse().map(item => ({
+          const formattedData = data.history.reverse().map((item) => ({
             ...item,
             createdAt: new Date(item.createdAt).toLocaleString(),
           }));
           setHistoryData(formattedData);
         } else {
-          setError(data.msg || 'Failed to fetch history');
+          setError(data.msg || "Failed to fetch history");
         }
       } catch (err) {
         console.error(err);
-        setError('An error occurred while fetching the history');
+        setError("Log In Sign up first");
       }
     };
 
@@ -38,7 +41,9 @@ const History = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4 text-light">Search History</h1>
+      <h1 className="text-center mb-4" style={{ color: "#00FFFF" }}>
+        Search History
+      </h1>
       {error && <p className="text-danger">{error}</p>}
       {historyData.length > 0 ? (
         <ul className="list-group">
@@ -46,12 +51,19 @@ const History = () => {
             <li key={index} className="list-group-item">
               <p className="mb-1">Search Text: {item.searchText}</p>
               <p className="mb-1">Date and Time: {item.createdAt}</p>
-              <img src={item.imageUrl} alt={item.searchText} className="img-thumbnail" style={{ maxWidth: "200px" }} />
+              <img
+                src={item.imageUrl}
+                alt={item.searchText}
+                className="img-thumbnail"
+                style={{ maxWidth: "200px" }}
+              />
             </li>
           ))}
         </ul>
       ) : (
-        <p className="text-muted text-center text-light">{!error && "No history available || Try Sign up / Log in"}</p>
+        <p className="text-muted text-center text-light">
+          {!error && "No history available || Try Sign up / Log in"}
+        </p>
       )}
     </div>
   );

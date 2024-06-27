@@ -3,32 +3,35 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import './styles/auth.css';
+import '../styles/auth.scss';
 
-const Signup = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const addNewUser = async (e) => {
+  const checkUser = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoading(true); // Show loading indicator
     try {
-      const res = await axios.post(`https://aibackend-1d3h.onrender.com/api/v1/auth/signup`, {
+      const res = await axios.post(`https://aibackend-1d3h.onrender.com/api/v1/auth/login`, {
         email,
         password
       }, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
       });
+
       const data = res.data;
       if (data.status === "success") {
-        toast.success("Signup successful!", {
+        localStorage.setItem("authToken", data.data.token);
+        localStorage.setItem("userEmail", data.data.user.email);
+        toast.success("Login successful!", {
           position: "top-right",
           autoClose: 3000,
-          onClose: () => navigate("/login")
+          onClose: () => navigate('/')
         });
       } else {
         toast.error(data.msg, {
@@ -38,22 +41,26 @@ const Signup = () => {
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      toast.error("An error occurred while signing up", {
+      toast.error("An error occurred while logging in", {
         position: "top-right",
-        autoClose: 3000
+        autoClose: 2000
       });
-    }
-    finally{
-      setIsLoading(false);
+    } finally {
+      setIsLoading(false); // Hide loading indicator
     }
   };
 
   return (
     <div className="authBox">
       <div id="signup" className="container">
-        <h2>Create Your Account</h2>
-        <form onSubmit={addNewUser}>
-          <label htmlFor="email">Email</label>
+        <h2 style={{ color: "#00FFFF", backgroundColor:"#001f3f", padding:"5px", borderRadius:"5px"}}>Log In</h2>
+        <h4>Try Out With</h4> 
+        <div className="mx-4">
+        <p><b style={{color:"#00008B"}}>Email:</b> <i>test@gmail.com </i></p>
+        <p><b style={{color:"#00008B"}}>pass :</b> <i>test1234</i></p>
+        </div>
+        <form onSubmit={checkUser}>
+          <label htmlFor="email">Email:</label>
           <input
             type="text"
             id="email"
@@ -61,8 +68,7 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-          />
-          <br />
+          /><br />
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -71,13 +77,12 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />
-          <br />
+          /><br />
           <button type="submit" disabled={isLoading}>
-          {isLoading?"Sign in...":"Sign in"}
+            {isLoading ? "Logging in..." : "Login"}
           </button>
-          <Link to="/login">
-            <button type="button">Already a User?</button>
+          <Link to="/signup">
+            <button type="button">SignUp</button>
           </Link>
         </form>
         <ToastContainer />
@@ -86,4 +91,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

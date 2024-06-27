@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
-import "./commonStyles/navbar.css";
+import "../styles/navbar.scss";
 import { BiUser } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-
-  const [user, setUser] = useState("Login/SignUp");
+  const [user, setUser] = useState(""); // Initialize user state with an empty string
 
   useEffect(() => {
     const currUser = localStorage.getItem('userEmail');
     if (currUser) {
       setUser(currUser);
+    } else {
+      setUser("Login/SignUp"); // Set default message if user is not available
     }
   }, []);
 
   const navLinkStyles = ({ isActive }) => {
     return {
-      color: isActive ? "red" : "white",
+      color: isActive ? "#FFFF00" : "white",
+      textDecoration: "none"
     };
   };
 
   return (
     <div className="main">
-      <div className="left">
+      <div className="left" style={{listStyle:"none"}}>
         <NavLink style={navLinkStyles} to="/">
           Home
         </NavLink>
@@ -35,14 +37,14 @@ const Navbar = () => {
         <NavLink style={navLinkStyles} to="/contact">
           Contact
         </NavLink>
-        <NavLink style={navLinkStyles} to="/about">
-          About
+        <NavLink style={navLinkStyles} to="/pricing">
+          Pricing
         </NavLink>
       </div>
       <div className="right">
-        <p>{user}</p>
-        <div className="user-icon" style={{ color: "red" }}>
-          <NavLink style={navLinkStyles} to="/signup">
+        <p className="m-2">{user}</p>
+        <div className="user-icon mx-2" style={{ color: "red" }}>
+          <NavLink style={navLinkStyles} to="/login">
             <BiUser size={24} />
           </NavLink>
         </div>

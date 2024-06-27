@@ -3,35 +3,32 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import './styles/auth.css';
+import '../styles/auth.scss';
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const checkUser = async (e) => {
+  const addNewUser = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Show loading indicator
+    setIsLoading(true);
     try {
-      const res = await axios.post(`https://aibackend-1d3h.onrender.com/api/v1/auth/login`, {
+      const res = await axios.post(`https://aibackend-1d3h.onrender.com/api/v1/auth/signup`, {
         email,
         password
       }, {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
       });
-
       const data = res.data;
       if (data.status === "success") {
-        localStorage.setItem("authToken", data.data.token);
-        localStorage.setItem("userEmail", data.data.user.email);
-        toast.success("Login successful!", {
+        toast.success("Signup successful!", {
           position: "top-right",
           autoClose: 3000,
-          onClose: () => navigate('/')
+          onClose: () => navigate("/login")
         });
       } else {
         toast.error(data.msg, {
@@ -41,21 +38,22 @@ const Login = () => {
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      toast.error("An error occurred while logging in", {
+      toast.error("An error occurred while signing up", {
         position: "top-right",
-        autoClose: 2000
+        autoClose: 3000
       });
-    } finally {
-      setIsLoading(false); // Hide loading indicator
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="authBox">
       <div id="signup" className="container">
-        <h2>Log In</h2>
-        <form onSubmit={checkUser}>
-          <label htmlFor="email">Email:</label>
+        <h2 style={{ color: "#00FFFF", backgroundColor:"#001f3f", padding:"5px", borderRadius:"5px"}}>Create Your Account</h2>
+        <form onSubmit={addNewUser}>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
             id="email"
@@ -63,7 +61,8 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-          /><br />
+          />
+          <br />
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -72,12 +71,13 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          /><br />
+          />
+          <br />
           <button type="submit" disabled={isLoading}>
-            {isLoading ? "Logging in..." : "Login"}
+          {isLoading?"Sign in...":"Sign in"}
           </button>
-          <Link to="/signup">
-            <button type="button">SignUp</button>
+          <Link to="/login">
+            <button type="button">Already a User?</button>
           </Link>
         </form>
         <ToastContainer />
@@ -86,4 +86,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
