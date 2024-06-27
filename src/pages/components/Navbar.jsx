@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../styles/navbar.scss";
 import { BiUser } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
-import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -21,7 +20,11 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setUser("Login");
-    navigate("login");
+    navigate("/login");
+  };
+
+  const handleUserClick = () => {
+    navigate("/login");
   };
 
   const navLinkStyles = ({ isActive }) => {
@@ -50,20 +53,13 @@ const Navbar = () => {
           Pricing
         </NavLink>
       </div>
-      <div className="right d-flex justify-content-between align-items-center " style={{flexBasis:"20%"}}>
+      <div className="right d-flex justify-content-between align-items-center" style={{ flexBasis: "20%" }}>
         <p className="m-2">{user}</p>
-        <div
-          className="user-icon mx-2"
-          style={{ color: "red", cursor: "pointer" }}
-        >
-          <button
-            onClick={handleLogout}
-            className="btn btn-sm btn-outline-danger"
-            style={{ marginRight: "10px" }}
-          >
+        <div className="user-icon mx-2" style={{ color: "red", cursor: "pointer" }}>
+          <button onClick={handleLogout} className="btn btn-sm btn-outline-danger" style={{ marginRight: "10px" }}>
             Logout
           </button>
-          <BiUser size={24} />
+          <BiUser size={35} onClick={handleUserClick} />
         </div>
       </div>
     </div>
