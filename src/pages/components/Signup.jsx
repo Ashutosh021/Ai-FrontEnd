@@ -74,7 +74,7 @@ const Signup = () => {
           />
           <br />
           <button type="submit" disabled={isLoading}>
-          {isLoading?"Sign in...":"Sign in"}
+          {isLoading?"Sign up in progress ...":"Sign up"}
           </button>
           <Link to="/login">
             <button type="button">Already a User?</button>
