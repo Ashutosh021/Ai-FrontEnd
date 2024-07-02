@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true); // Show loading indicator
     try {
-      const res = await axios.post(`https://aibackend-1d3h.onrender.com/api/v1/auth/login`, {
+      const res = await axios.post(`https://ai-backend-1azo.onrender.com/api/v1/auth/login`, {
         email,
         password
       }, {
