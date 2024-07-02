@@ -23,10 +23,12 @@ const ImageGenerator = () => {
     setIsLoading(true);
     try {
       const authToken = localStorage.getItem("authToken");
+      const userEmail = localStorage.getItem("userEmail");
       const res = await axios.post(
         `https://aibackend-1d3h.onrender.com/api/v1/images`,
         {
           searchText: searchText,
+          userEmail:userEmail
         },
         {
           headers: {
