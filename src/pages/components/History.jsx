@@ -10,14 +10,14 @@ const History = () => {
     const fetchHistory = async () => {
       try {
         const authToken = localStorage.getItem("authToken");
-        const userEmail = localStorage.getItem("userEmail");
+        const userId = localStorage.getItem("userEmail");
         const res = await axios.get('https://ai-backend-1azo.onrender.com/api/v1/history', {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${authToken}`,
           },
           params: {
-            userId: userEmail,
+            userId: userId,
           },
         });
 
@@ -32,14 +32,12 @@ const History = () => {
           setError(data.msg || "Failed to fetch history");
         }
       } catch (err) {
-        console.error(err);
-        setError("Log In Sign up first");
+        setError(data.msg || "Try Log In Sign up");
       }
     };
 
     fetchHistory();
   }, []);
-
 
   return (
     <div className="container mt-5">
@@ -53,7 +51,7 @@ const History = () => {
             <li key={index} className="list-group-item">
               <p className="mb-1">Search Text: {item.searchText}</p>
               <p className="mb-1">Date and Time: {item.createdAt}</p>
-              <p className="mb-1">Date and Time: {item.userId}</p>
+              <p className="mb-1">UserId: {item.userId}</p>
               <img
                 src={item.imageUrl}
                 alt={item.searchText}

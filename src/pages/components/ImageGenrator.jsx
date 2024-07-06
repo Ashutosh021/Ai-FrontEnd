@@ -24,7 +24,6 @@ const ImageGenerator = () => {
     try {
       const authToken = localStorage.getItem("authToken");
       const userEmail = localStorage.getItem("userEmail");
-      console.log(`front ${userEmail}`);
       const res = await axios.post(
         `https://ai-backend-1azo.onrender.com/api/v1/images`,
         {
