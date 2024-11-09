@@ -11,13 +11,16 @@ const ImageHistory = () => {
     const fetchHistory = async () => {
       try {
         const authToken = localStorage.getItem("authToken");
-        const res = await axios.get('https://ai-backend-1azo.onrender.com/image/history', {
+        const response = await axios.get('https://ai-backend-1azo.onrender.com/image/history', {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${authToken}`,
           }
         });
-        setHistory(response.data.history);
+        if(!response.history){
+          setError("No History || Try to Generate Images")
+        }
+        setHistory(response.history);
       } catch (err) {
         setError("Failed to fetch history. Please try again.");
       } finally {

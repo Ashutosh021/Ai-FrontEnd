@@ -21,7 +21,7 @@ const ImageGenerator = () => {
     
     try {
       const authToken = localStorage.getItem("authToken");
-      const res = await axios.post(
+      const response = await axios.post(
         "https://ai-backend-1azo.onrender.com/image/generate-image",
         {
           searchText: searchText,
@@ -33,7 +33,7 @@ const ImageGenerator = () => {
           },
         }
       );
-      setImageUrl(response.data.imageUrl); // Sets the image URL returned by the backend
+      setImageUrl(response.imageUrl); // Sets the image URL returned by the backend
     } catch (error) {
       console.error("Error generating image:", error);
       setError("Failed to generate image. Please try again.");
