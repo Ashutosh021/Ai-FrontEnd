@@ -23,7 +23,9 @@ const Signup = () => {
       const data = await response.json();
       setMessage(data.message);
       if (data.success) {
+        localStorage.setItem("authToken",data.token);
         setFormData({ name: '', email: '', password: '' });
+        window.location.href = "/";
       }
     } catch (error) {
       setMessage('Error: ' + error.message);

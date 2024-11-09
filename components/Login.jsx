@@ -24,6 +24,7 @@ const Login = () => {
       const data = await response.json();
       setMessage(data.message);
       if (data.success) {
+        localStorage.setItem("authToken",data.token);
         setFormData({ email: "", password: "" });
         window.location.href = "/"; // Redirect to home page on success
       }

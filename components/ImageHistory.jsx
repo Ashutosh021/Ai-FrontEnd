@@ -10,7 +10,13 @@ const ImageHistory = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get("https://ai-backend-1azo.onrender.com/image/history", { withCredentials: true });
+        const authToken = localStorage.getItem("authToken");
+        const res = await axios.get('https://ai-backend-1azo.onrender.com/image/history', {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          }
+        });
         setHistory(response.data.history);
       } catch (err) {
         setError("Failed to fetch history. Please try again.");
