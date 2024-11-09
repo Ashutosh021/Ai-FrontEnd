@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("https://ai-backend-1azo.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const Login = () => {
       const data = await response.json();
       setMessage(data.message);
       if (data.success) {
-        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("authToken",data.token);
         setFormData({ email: "", password: "" });
         window.location.href = "/"; // Redirect to home page on success
       }

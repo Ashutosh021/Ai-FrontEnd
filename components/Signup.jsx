@@ -13,7 +13,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch('https://ai-backend-1azo.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,8 +23,9 @@ const Signup = () => {
       const data = await response.json();
       setMessage(data.message);
       if (data.success) {
-        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("authToken",data.token);
         setFormData({ name: '', email: '', password: '' });
+        window.location.href = "/";
       }
     } catch (error) {
       setMessage('Error: ' + error.message);

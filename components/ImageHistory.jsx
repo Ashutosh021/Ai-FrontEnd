@@ -11,13 +11,12 @@ const ImageHistory = () => {
     const fetchHistory = async () => {
       try {
         const authToken = localStorage.getItem("authToken");
-      const response = await axios.get("http://localhost:5000/image/history",
-        {
+        const res = await axios.get('https://ai-backend-1azo.onrender.com/image/history', {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${authToken}`,
-          },
-        })
+          }
+        });
         setHistory(response.data.history);
       } catch (err) {
         setError("Failed to fetch history. Please try again.");

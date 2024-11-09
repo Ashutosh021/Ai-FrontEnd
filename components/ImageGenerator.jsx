@@ -18,20 +18,22 @@ const ImageGenerator = () => {
       setLoading(false);
       return;
     }
-
+    
     try {
       const authToken = localStorage.getItem("authToken");
-      const response = await axios.post(
-        `http://localhost:5000/image/generate-image`,
+      const res = await axios.post(
+        "https://ai-backend-1azo.onrender.com/image/generate-image",
         {
           searchText: searchText,
+          userEmail:userEmail
         },
         {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${authToken}`,
           },
-        })
+        }
+      );
       setImageUrl(response.data.imageUrl); // Sets the image URL returned by the backend
     } catch (error) {
       console.error("Error generating image:", error);
