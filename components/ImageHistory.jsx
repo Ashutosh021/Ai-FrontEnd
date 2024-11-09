@@ -17,10 +17,10 @@ const ImageHistory = () => {
             Authorization: `Bearer ${authToken}`,
           }
         });
-        if(!response.history){
-          setError("No History || Try to Generate Images")
+        if(!response.data.history){
+          setError("response")
         }
-        setHistory(response.history);
+        setHistory(response.data.history);
       } catch (err) {
         setError("Failed to fetch history. Please try again.");
       } finally {

@@ -33,7 +33,7 @@ const ImageGenerator = () => {
           },
         }
       );
-      setImageUrl(response.imageUrl); // Sets the image URL returned by the backend
+      setImageUrl(response.data.imageUrl); // Sets the image URL returned by the backend
     } catch (error) {
       console.error("Error generating image:", error);
       setError("Failed to generate image. Please try again.");
