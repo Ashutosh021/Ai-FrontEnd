@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/image-generator.scss"; // Import SCSS file for styling
 
@@ -7,6 +7,31 @@ const ImageGenerator = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [loadingMessage, setLoadingMessage] = useState("");
+
+  const loadingMessages = [
+    "Prompt received",
+    "Model activated",
+    "Image generation in progress",
+    "Generating...",
+    "This may take a while, please wait..."
+  ];
+
+  useEffect(() => {
+    let messageIndex = 0;
+    let interval;
+
+    if (loading) {
+      interval = setInterval(() => {
+        setLoadingMessage(loadingMessages[messageIndex]);
+        messageIndex = (messageIndex + 1) % loadingMessages.length;
+      }, 600); // Change message every 1 second
+    } else {
+      setLoadingMessage("");
+    }
+
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const generateImage = async (e) => {
     e.preventDefault();
@@ -18,14 +43,12 @@ const ImageGenerator = () => {
       setLoading(false);
       return;
     }
-    
+
     try {
       const authToken = localStorage.getItem("authToken");
       const response = await axios.post(
         "https://ai-backend-1azo.onrender.com/image/generate-image",
-        {
-          searchText: searchText,
-        },
+        { searchText },
         {
           headers: {
             "Content-Type": "application/json",
@@ -77,13 +100,12 @@ const ImageGenerator = () => {
 
       <div className="generated-img">
         {loading ? (
-          <div className="spinner"></div>
+          <div>
+            <div className="spinner"></div>
+            <p className="loading-message">{loadingMessage}</p>
+          </div>
         ) : imageUrl ? (
-          <img
-            src={imageUrl}
-            alt="Generated"
-            className="generated-image"
-          />
+          <img src={imageUrl} alt="Generated" className="generated-image" />
         ) : (
           <p>No image generated yet.</p>
         )}

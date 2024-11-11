@@ -42,7 +42,7 @@ const ImageHistory = () => {
         <ul className="history-list">
           {history.map((item) => (
             <li key={item._id} className="history-item">
-              <p className="item-text">{item.searchText}</p>
+              <p className="item-text">Prompt :- {item.searchText}</p>
               <img
                 src={item.imageUrl}
                 alt={item.searchText}
