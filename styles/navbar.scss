@@ -6,9 +6,10 @@
   color: #fff;
 
   .logo {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
     text-decoration: none;
+    color: #ffa500;
   }
 
   .nav-bar {
@@ -28,6 +29,10 @@
 
       &.active {
         background-color: #555;
+      }
+
+      &:last-child{
+        font-size: 25px;
       }
     }
   }

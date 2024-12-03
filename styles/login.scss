@@ -1,107 +1,92 @@
-// Colors and basic styling variables
-$primary-color: #4caf50;  // Light green color for buttons and highlights
-$background-color: #121212; // Dark background color
-$text-color: #e0e0e0;  // Light grey text color
-$error-color: #ff4d4d;  // Red color for error messages
-$success-color: #4caf50;  // Green color for success messages
-$input-background: #333;  // Dark background for inputs
-$border-color: #555;  // Lighter color for borders
-
-// Container and Layout styling
 .login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background-color: rgb(32, 32, 32);
+  color: #ffffff;
   min-height: 100vh;
-  background-color: $background-color;
-  color: $text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  
+
   h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #ff5722;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background-color: #222222;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 400px;  // Limiting width for the form
-  }
+    max-width: 400px;
 
-  .login-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: $input-background;
-    color: $text-color;
-    border: 1px solid $border-color;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
+    .login-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #666666;
+      border-radius: 5px;
+      background-color: #444444;
+      color: #ffffff;
+      font-size: 1rem;
 
-    &::placeholder {
-      color: $text-color;
-      opacity: 0.7;
+      &:focus {
+        border-color: #ff5722;
+        outline: none;
+        box-shadow: 0 0 5px #ff5722;
+      }
     }
 
-    &:focus {
-      border-color: $primary-color;
-    }
-  }
+    .login-button,
+    .signup-button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #ffffff;
+      background-color: #ff5722;
+      cursor: pointer;
+      transition: background-color 0.3s;
 
-  .login-button,
-  .signup-button {
-    width: 100%;
-    padding: 10px;
-    background-color: $primary-color;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: lighten($primary-color, 10%);
+      &:hover {
+        background-color: #ff7043;
+      }
     }
 
-    &:active {
-      background-color: lighten($primary-color, 20%);
-    }
-  }
+    .signup-button {
+      background-color: transparent;
+      border: 1px solid #ff5722;
 
-  // Styling for the signup button to appear under the login button
-  .signup-button {
-    background-color: transparent;
-    border: 1px solid $primary-color;
-    margin-top: 10px;
-    color: $primary-color;
-
-    &:hover {
-      background-color: $primary-color;
-      color: #fff;
+      &:hover {
+        background-color: #ff5722;
+      }
     }
   }
 
   .message {
-    margin-top: 10px;
-    padding: 10px;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    padding: 10px 15px;
     border-radius: 5px;
-    font-size: 1rem;
     text-align: center;
 
     &.error {
-      background-color: $error-color;
-      color: #fff;
+      background-color: #e74c3c;
+      color: #ffffff;
     }
 
     &.success {
-      background-color: $success-color;
-      color: #fff;
+      background-color: #2ecc71;
+      color: #ffffff;
     }
   }
 }

@@ -34,8 +34,8 @@ const Footer = () => {
 
         <div className="footer-contact">
           <h3>Contact Us</h3>
-          <p>Email: support@artifyai.com</p>
-          <p>Phone: +1 234 567 890</p>
+          <p>Email: mail.ashutosh246@gmail.com</p>
+          <p>Phone: 6398529296</p>
         </div>
       </div>
       <div className="footer-bottom">

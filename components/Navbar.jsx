@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [iconPath,setIconPath]=useState('/login');
 
   // Function to toggle the hamburger menu
   const toggleMenu = () => {
@@ -13,6 +15,12 @@ const Navbar = () => {
   const closeMenu = () => {
     setIsOpen(false);
   };
+
+  const handleProfile = ()=>{
+    const authToken = localStorage.getItem("authToken");
+    authToken && setIconPath('/profile')
+    setIsOpen(false);
+  }
 
   return (
     <div className="nav-main">
@@ -35,7 +43,7 @@ const Navbar = () => {
         <Link to="/pricing" className="nav-tabs" onClick={closeMenu}>Pricing</Link>
         <Link to="/about" className="nav-tabs" onClick={closeMenu}>About Us</Link>
         <Link to="/contact" className="nav-tabs" onClick={closeMenu}>Contact</Link>
-        <Link to="/login" className="nav-tabs" onClick={closeMenu}>Login/Signup</Link>
+        <Link to={iconPath} className="nav-tabs" onClick={handleProfile}><FaUser /></Link>
       </div>
     </div>
   );

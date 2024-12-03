@@ -1,55 +1,50 @@
-// Colors and basic styling variables
-$primary-color: #4caf50;  // Light green color for buttons and highlights
-$background-color: #121212; // Dark background color
-$text-color: #e0e0e0;  // Light grey text color
-$error-color: #ff4d4d;  // Red color for error messages
-$success-color: #4caf50;  // Green color for success messages
-$input-background: #333;  // Dark background for inputs
-$border-color: #555;  // Lighter color for borders
-
-// Container and Layout styling
 .signup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: $background-color;
-  color: $text-color;
+  background-color: rgb(32, 32, 32);
+  color: #e0e0e0;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  
+
   h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #ff5722;
   }
 
   form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 400px;  // Limiting width for the form
+    max-width: 400px;
+    background-color: #222222;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
   .signup-input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    background-color: $input-background;
-    color: $text-color;
-    border: 1px solid $border-color;
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
     border-radius: 5px;
     font-size: 1rem;
     outline: none;
 
     &::placeholder {
-      color: $text-color;
+      color: #e0e0e0;
       opacity: 0.7;
     }
 
     &:focus {
-      border-color: $primary-color;
+      border-color: #ff5722;
     }
   }
 
@@ -57,7 +52,7 @@ $border-color: #555;  // Lighter color for borders
   .login-button {
     width: 100%;
     padding: 10px;
-    background-color: $primary-color;
+    background-color: #ff5722;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -66,23 +61,22 @@ $border-color: #555;  // Lighter color for borders
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: lighten($primary-color, 10%);
+      background-color: lighten(#ff5722, 10%);
     }
 
     &:active {
-      background-color: lighten($primary-color, 20%);
+      background-color: lighten(#ff5722, 20%);
     }
   }
 
-  // Styling for the login button to appear under the signup button
   .login-button {
     background-color: transparent;
-    border: 1px solid $primary-color;
+    border: 1px solid #ff5722;
     margin-top: 10px;
-    color: $primary-color;
+    color: #ff5722;
 
     &:hover {
-      background-color: $primary-color;
+      background-color: #ff5722;
       color: #fff;
     }
   }
@@ -95,12 +89,12 @@ $border-color: #555;  // Lighter color for borders
     text-align: center;
 
     &.error {
-      background-color: $error-color;
+      background-color: #ff4d4d;
       color: #fff;
     }
 
     &.success {
-      background-color: $success-color;
+      background-color: #4caf50;
       color: #fff;
     }
   }

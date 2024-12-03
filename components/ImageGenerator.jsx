@@ -25,7 +25,7 @@ const ImageGenerator = () => {
       interval = setInterval(() => {
         setLoadingMessage(loadingMessages[messageIndex]);
         messageIndex = (messageIndex + 1) % loadingMessages.length;
-      }, 600); // Change message every 1 second
+      }, 800); // Change message every 1 second
     } else {
       setLoadingMessage("");
     }
@@ -47,7 +47,7 @@ const ImageGenerator = () => {
     try {
       const authToken = localStorage.getItem("authToken");
       const response = await axios.post(
-        "https://ai-backend-1azo.onrender.com/image/generate-image",
+        `${import.meta.env.VITE_BACKEND_URL}/image/generate-image`,
         { searchText },
         {
           headers: {
@@ -62,6 +62,7 @@ const ImageGenerator = () => {
       setError("Failed to generate image. Please try again.");
     } finally {
       setLoading(false);
+      setSearchText("");
     }
   };
 
